@@ -1,10 +1,10 @@
 Supplier.destroy_all
-s1 = Supplier.create :email => 'tim@ga', :password => 'chiken', :name => 'Tim'
-s2 = Supplier.create :email => 'kenny@ga', :password => 'chiken', :name => 'Kenny'
-s3 = Supplier.create :email => 'lucas@ga', :password => 'chiken', :name => 'Lucas'
-s4 = Supplier.create :email => 'robert@ga', :password => 'chiken', :name => 'Robert'
-s5 = Supplier.create :email => 'john@ga', :password => 'chiken', :name => 'John'
-s6 = Supplier.create :email => 'joel@ga', :password => 'chiken', :name => 'Joel'
+s1 = Supplier.create :email => 'tim@ga', :password => 'chicken', :name => 'Tim'
+s2 = Supplier.create :email => 'kenny@ga', :password => 'chicken', :name => 'Kenny'
+s3 = Supplier.create :email => 'lucas@ga', :password => 'chicken', :name => 'Lucas'
+s4 = Supplier.create :email => 'robert@ga', :password => 'chicken', :name => 'Robert'
+s5 = Supplier.create :email => 'john@ga', :password => 'chicken', :name => 'John'
+s6 = Supplier.create :email => 'joel@ga', :password => 'chicken', :name => 'Joel'
 
 SkillCategory.destroy_all
 sc1 = SkillCategory.create :name => 'Cook'
