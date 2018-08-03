@@ -1,15 +1,3 @@
-# == Schema Information
-#
-# Table name: suppliers
-#
-#  id              :bigint(8)        not null, primary key
-#  email           :text
-#  password_digest :text
-#  name            :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#
-
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 # This model initially had no columns defined. If you add columns to the
