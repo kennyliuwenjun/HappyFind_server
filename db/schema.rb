@@ -10,10 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_03_012417) do
+ActiveRecord::Schema.define(version: 2018_08_03_020548) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "service_id"
+    t.date "date"
+    t.float "hours"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "services", force: :cascade do |t|
+    t.integer "supplier_id"
+    t.integer "skill_category_id"
+    t.decimal "price", precision: 8, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["supplier_id", "skill_category_id"], name: "index_services_on_supplier_id_and_skill_category_id"
+  end
+
+  create_table "skill_categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "suppliers", force: :cascade do |t|
     t.text "email"
@@ -21,6 +44,8 @@ ActiveRecord::Schema.define(version: 2018_08_03_012417) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "lat"
+    t.float "lng"
   end
 
 end
