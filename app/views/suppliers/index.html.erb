@@ -1,0 +1,5 @@
+<h1>All suppliers:<%= number_to_human Supplier.count %></h1>
+  <% @suppliers.each do |supplier| %>
+  <p><%= supplier.email %></p>
+  <% end %>
+</ol>

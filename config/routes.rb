@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
-  resources :skill_categories
+  root :to => 'suppliers#index'
+
+
+  get '/login' => 'session#new'
+  post '/login' => 'session#create'
+  delete '/login' => 'session#destroy'
+
+  get '/session' => 'suppliers#index'
 
 end

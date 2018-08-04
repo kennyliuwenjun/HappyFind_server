@@ -1,0 +1,7 @@
+<% if @supplier.errors.any?  %>
+
+<ol>
+  <% @supplier.errors.full_messages.each do |msg| %>
+  <li><%= msg %></li>
+  <% end %>
+</ol>
