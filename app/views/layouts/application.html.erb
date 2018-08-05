@@ -11,7 +11,14 @@
 
   <body>
 
-    
+    <%= link_to 'Home', root_path %>
+    <% if @current_supplier.present? %>
+    <%= link_to 'Email addresses', suppliers_path if @current_supplier %>
+    <%= link_to "Sign out #{ @current_supplier.email }", login_path, :method => 'delete' %>
+    <% else  %>
+    <%= link_to 'Sign in', login_path %>
+    <%= link_to 'Sign up', new_supplier_path %>
+    <% end %>
     <%= yield %>
   </body>
 </html>
