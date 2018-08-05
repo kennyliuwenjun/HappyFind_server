@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   root :to => 'suppliers#index'
 
+  get '/skill_categories' => 'skill_categories#index'
+
+  post '/suppliers' => 'suppliers#search'
 
   get '/login' => 'session#new'
   post '/login' => 'session#create'

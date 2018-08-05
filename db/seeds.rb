@@ -1,10 +1,11 @@
 Supplier.destroy_all
-s1 = Supplier.create :email => 'tim@ga', :password => 'chicken', :name => 'Tim'
-s2 = Supplier.create :email => 'kenny@ga', :password => 'chicken', :name => 'Kenny'
-s3 = Supplier.create :email => 'lucas@ga', :password => 'chicken', :name => 'Lucas'
-s4 = Supplier.create :email => 'robert@ga', :password => 'chicken', :name => 'Robert'
-s5 = Supplier.create :email => 'john@ga', :password => 'chicken', :name => 'John'
-s6 = Supplier.create :email => 'joel@ga', :password => 'chicken', :name => 'Joel'
+s1 = Supplier.create :email => 'tim@ga', :password => 'chicken', :name => 'Tim', :latitude => -33.8845689, :longitude => 151.205796708695
+s2 = Supplier.create :email => 'kenny@ga', :password => 'chicken', :name => 'Kenny', :latitude => -33.7744947, :longitude => 151.0475215
+s3 = Supplier.create :email => 'lucas@ga', :password => 'chicken', :name => 'Lucas', :latitude => -33.7311912, :longitude => 151.20169
+s4 = Supplier.create :email => 'robert@ga', :password => 'chicken', :name => 'Robert', :latitude => -33.866008, :longitude => 151.205552
+s5 = Supplier.create :email => 'john@ga', :password => 'chicken', :name => 'John', :latitude => -33.8714234, :longitude => 151.2044743
+s6 = Supplier.create :email => 'joel@ga', :password => 'chicken', :name => 'Joel', :latitude => -33.8714234, :longitude => 151.2044743
+s7 = Supplier.create :email => 'robot1@ga', :password => 'chicken', :name => 'Robot1', :latitude => -33.7311912, :longitude => 151.0062336
 
 SkillCategory.destroy_all
 sc1 = SkillCategory.create :name => 'Cook'
