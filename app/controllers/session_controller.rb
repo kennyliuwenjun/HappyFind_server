@@ -3,23 +3,24 @@ class SessionController < ApplicationController
     end
 
 
-   def create
+  def create
     # supplier = Supplier.find_by :name =>
     # params[:name]
-    supplier = Supplier.find_by :email =>
-    params[:email]
-    if supplier.present? && supplier.authenticate(params[:password])
+      supplier = Supplier.find_by :email =>
+      params[:email]
+    if supplier.present? &&   supplier.authenticate(params[:password])
 
-    session[:supplier_id] = supplier.id
-    redirect_to root_path
-   else
-    flash[:error] = "Invalid email or password"
-    redirect_to login_path
-   end
+      session[:supplier_id] = supplier.id
+      redirect_to root_path
+      else
+      flash[:error] = "Invalid email or password"
+      redirect_to login_path
+    end
+  end
 
    def destroy
     session[:supplier_id] = nil
     redirect_to root_path
    end
-  end
+
 end
