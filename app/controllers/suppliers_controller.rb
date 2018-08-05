@@ -1,5 +1,15 @@
-class SuppliersController <    ApplicationController
-  # before_action :check_for_admin, :only => [:index]
+class SuppliersController < ApplicationController
+ # before_action :check_for_admin, :only => [:index]
+ skip_before_action :verify_authenticity_token, :only => [:search]
+ # before_action :check_for_login, :only => [:show, :invite, :new, :create]
+
+ def search
+
+  @params = params
+  respond_to do |format|
+    format.json { render :search}
+  end
+ end
 
  def index
   @suppliers = Supplier.all
@@ -36,5 +46,9 @@ class SuppliersController <    ApplicationController
    private
     def supplier_params
       params.require(:supplier).permit(:name, :email, :password, :password_confirmation)
+    end
+
+    def search_params
+      params.require(:flight).permit(:plane_id, :flight_number, :from, :to, :depart_dt)
     end
 end
