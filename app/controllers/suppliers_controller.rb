@@ -16,7 +16,7 @@ class SuppliersController < ApplicationController
                    Supplier.all
                  end
     if params[:skill_category].present?
-      
+
     end
     render :action => 'search.json'
   end
@@ -53,7 +53,11 @@ class SuppliersController < ApplicationController
       format.json { render json: @supplier.errors, status: :unprocessable_entity }
      end
    end
-  end
+ end
+   private
+    def supplier_params
+      params.require(:supplier).permit(:name, :address, :latitude, :longitude, :email, :password, :password_confirmation)
+    end
 
   private
   def supplier_params
