@@ -3,11 +3,37 @@ class SuppliersController < ApplicationController
  skip_before_action :verify_authenticity_token, :only => [:search]
  # before_action :check_for_login, :only => [:show, :invite, :new, :create]
 
+<<<<<<< HEAD
  def search
 
   @params = params
   respond_to do |format|
     format.json { render :search}
+=======
+  @_default_search_distanse = 10;
+
+  # POST /suppliers
+  # POST /suppliers.json
+  def search
+    if params[:geocode].present?
+     lat = params[:geocode][:latitude]
+     lng = params[:geocode][:longitude]
+     radius = params[:radius]? params[:radius] : @_default_search_distanse
+     skill_category = params[:skill_category]
+     if skill_category.present?
+       scope1 = Service.where(skill_category_id: skill_category).pluck(:supplier_id)
+       scope2 = Supplier.near([lat, lng], radius, {order: "", units: :km}).pluck(:id)
+       @suppliers = Supplier.find( scope1 & scope2 )
+     else
+       @suppliers = Supplier.near([lat, lng], radius, units: :km)
+     end
+   elsif params[:skill_category].present?
+     @suppliers = Supplier.find(Service.where(skill_category_id: skill_category).pluck(:supplier_id));
+   else
+     @suppliers = Supplier.all
+   end
+    render :action => 'search.json'
+>>>>>>> 4e63a174614c2136816f8dc2f69a7129cb5853c7
   end
  end
 
