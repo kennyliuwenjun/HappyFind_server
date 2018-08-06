@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   get '/skill_categories' => 'skill_categories#index'
 
-  post '/suppliers' => 'suppliers#search'
+  get '/suppliers' => 'suppliers#index'
 
   resources :suppliers, :only => [:new, :create, :index] # 7 CRUD methods for suppliers
 

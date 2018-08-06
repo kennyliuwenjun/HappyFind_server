@@ -45,7 +45,7 @@ class SuppliersController < ApplicationController
  end
    private
     def supplier_params
-      params.require(:supplier).permit(:name, :email, :password, :password_confirmation)
+      params.require(:supplier).permit(:name, :address, :latitude, :longitude, :email, :password, :password_confirmation)
     end
 
     def search_params
