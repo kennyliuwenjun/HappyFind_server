@@ -21,11 +21,11 @@ class SuppliersController < ApplicationController
        @suppliers = Supplier.near([lat, lng], radius, units: :km)
      end
    elsif params[:skill_category].present?
-     @suppliers = Supplier.find(Service.where(skill_category_id: skill_category).pluck(:supplier_id));
+     @suppliers = Supplier.find(Service.where(skill_category_id: params[:skill_category]).pluck(:supplier_id));
    else
      @suppliers = Supplier.all
    end
-    render :action => 'search.json'
+   render :action => 'search_result.json'
   end
 
 
@@ -36,16 +36,6 @@ class SuppliersController < ApplicationController
  def new
   @supplier = Supplier.new
  end
-
-  # def create
-  #  @suppliers = Supplier.new user_params
-  #  if @supplier.save
-  #    session[:supplier_id] = @supplier.id
-  #    redirect_to new_home_path                    # ask boys about path
-  #  else
-  #    render :new
-  #  end
-  # end
 
   def create
    @supplier = Supplier.new(supplier_params)
