@@ -30,6 +30,7 @@ gem 'jbuilder', '~> 2.5'
  gem 'fusioncharts-rails'
  gem 'bootstrap', '~> 4.1.1'
  gem 'geocoder'
+ gem 'rack-cors'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

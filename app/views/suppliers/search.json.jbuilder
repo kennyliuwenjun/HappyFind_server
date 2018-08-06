@@ -1,1 +1,1 @@
-json.aaa 123
+json.array! @suppliers, partial: 'suppliers/supplier', as: :supplier
