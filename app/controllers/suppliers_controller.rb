@@ -11,13 +11,23 @@ class SuppliersController < ApplicationController
                    lat = params[:geocode][:latitude]
                    lng = params[:geocode][:longitude]
                    radius = params[:radius]? params[:radius] : 10
-                   Supplier.near([lat, lng], radius, units: :km)
+                   if params[:skill_category].present?
+                     Supplier.near([lat, lng], radius, units: :km).each do |supplier|
+                       supplier.services.where(SkillCategory_id: params[:skill_category])
+                     end
+                   else
+                     Supplier.near([lat, lng], radius, units: :km)
+                   end
                  else
                    Supplier.all
                  end
-    if params[:skill_category].present?
-
-    end
+    # if params[:skill_category].present?
+    #   @suppliers.each_with_index { |supplier,index|
+    #     unless (supplier.services.pluck(:skill_category_id).include? params[:skill_category])
+    #       @suppliers.delete(supplier)
+    #     end
+    #   }
+    # end
     render :action => 'search.json'
   end
 
