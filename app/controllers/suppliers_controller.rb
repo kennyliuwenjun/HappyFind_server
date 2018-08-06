@@ -3,31 +3,28 @@ class SuppliersController < ApplicationController
   skip_before_action :verify_authenticity_token, :only => [:search]
   # before_action :check_for_login, :only => [:show, :invite, :new, :create]
 
+  @_default_search_distanse = 10;
 
   # POST /suppliers
   # POST /suppliers.json
   def search
-    @suppliers = if params[:geocode].present?
-                   lat = params[:geocode][:latitude]
-                   lng = params[:geocode][:longitude]
-                   radius = params[:radius]? params[:radius] : 10
-                   if params[:skill_category].present?
-                     Supplier.near([lat, lng], radius, units: :km).each do |supplier|
-                       supplier.services.where(SkillCategory_id: params[:skill_category])
-                     end
-                   else
-                     Supplier.near([lat, lng], radius, units: :km)
-                   end
-                 else
-                   Supplier.all
-                 end
-    # if params[:skill_category].present?
-    #   @suppliers.each_with_index { |supplier,index|
-    #     unless (supplier.services.pluck(:skill_category_id).include? params[:skill_category])
-    #       @suppliers.delete(supplier)
-    #     end
-    #   }
-    # end
+    if params[:geocode].present?
+     lat = params[:geocode][:latitude]
+     lng = params[:geocode][:longitude]
+     radius = params[:radius]? params[:radius] : @_default_search_distanse
+     skill_category = params[:skill_category]
+     if skill_category.present?
+       scope1 = Service.where(skill_category_id: skill_category).pluck(:supplier_id)
+       scope2 = Supplier.near([lat, lng], radius, {order: "", units: :km}).pluck(:id)
+       @suppliers = Supplier.find( scope1 & scope2 )
+     else
+       @suppliers = Supplier.near([lat, lng], radius, units: :km)
+     end
+   elsif params[:skill_category].present?
+     @suppliers = Supplier.find(Service.where(skill_category_id: skill_category).pluck(:supplier_id));
+   else
+     @suppliers = Supplier.all
+   end
     render :action => 'search.json'
   end
 
