@@ -6,8 +6,8 @@ class OrdersController < ApplicationController
     @order = Order.new
   end
 
-  # /orders/create
-  # /orders/create.json
+  # POST /orders/create
+  # POST /orders/create.json
   def create
     @order = Order.new order_params
     respond_to do |format|
@@ -16,11 +16,13 @@ class OrdersController < ApplicationController
         format.json { render :show, status: :ok }
       else
         format.html { render :new }
-        format.json { ender json: {login: 'failed'}, status: :failed }
+        format.json { render json: {login: 'failed'}, status: :failed }
       end
     end
   end
 
+  # GET /orders
+  # GET /orders.json
   def index
     @orders = Order.all
   end
@@ -28,7 +30,7 @@ class OrdersController < ApplicationController
   def show
   end
 
-  
+
 
   private
   def order_params
@@ -51,7 +53,7 @@ class OrdersController < ApplicationController
     customer = {
       email: 'tim.caldwell@einti.com'
     }
-    
+
     # create & send emails
     cust_mailer = BookingMailer.customer_order_confirmation customer
     cust_response = cust_mailer.deliver_now
