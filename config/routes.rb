@@ -3,10 +3,6 @@ Rails.application.routes.draw do
 
   get '/skill_categories' => 'skill_categories#index'
 
-<<<<<<< HEAD
-  get '/orders' => 'orders#send_test_order'
-=======
->>>>>>> 87deea5f5f81874f07fc7e05870cb8ecd8fbc825
   get '/suppliers/:id/services' => 'services#supplier_services'
 
   get '/suppliers' => 'suppliers#index'
