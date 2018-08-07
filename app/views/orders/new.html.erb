@@ -1,0 +1,37 @@
+<%= form_for @order do |f| %>
+  <h1 >New Order</h1>
+  <div>
+    <%= f.label :service_id %>
+    <%= f.collection_select :service_id, @services,:id,:id, include_blank: true %>
+  </div>
+  <div >
+    <%= f.label :date %>
+    <%= f.date_field :date %>
+  </div>
+  <div >
+    <%= f.label :hours %>
+    <%= f.number_field :hours %>
+  </div>
+  <div >
+    <%= f.label :user_name %>
+    <%= f.text_field :user_name %>
+  </div>
+  <div >
+    <%= f.label :user_email %>
+    <%= f.email_field :user_email %>
+  </div>
+  <div >
+    <%= f.label :user_phone %>
+    <%= f.text_field :user_phone %>
+  </div>
+  <div >
+    <%= f.label :user_address %>
+    <%= f.text_field :user_address %>
+  </div>
+  <div >
+    <%= f.label :payment_status %>
+    <%= f.number_field :payment_status %>
+  </div>
+
+  <%= f.submit 'Create'%>
+<% end %>

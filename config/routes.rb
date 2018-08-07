@@ -3,12 +3,16 @@ Rails.application.routes.draw do
 
   get '/skill_categories' => 'skill_categories#index'
 
+  get '/suppliers/:id/services' => 'services#supplier_services'
 
   get '/suppliers' => 'suppliers#index'
-  get '/suppliers/:id/services' => 'services#supplier_services'
   post '/search_suppliers' => 'suppliers#search'
 
   resources :suppliers, :only => [:new, :create, :index] # 7 CRUD methods for suppliers
+  resources :services, :only => [:index]
+  resources :orders, :only => [:index, :new, :create]
+
+  post '/orders/create' => 'orders#create'
 
   get '/login' => 'session#new'
   post '/login' => 'session#create'

@@ -1,0 +1,22 @@
+<h1>All service:<%= number_to_human @services.count %></h1>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>supplier ID</th>
+      <th>Skill Category ID</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @services.each do |service| %>
+      <tr>
+        <td><%= service.id %></td>
+        <td><%= service.supplier_id  %></td>
+        <td><%= service.skill_category_id %></td>
+        <td><%= service.price %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
