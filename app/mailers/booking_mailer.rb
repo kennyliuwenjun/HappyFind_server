@@ -1,8 +1,12 @@
 class BookingMailer < ApplicationMailer
 
-  def order_confirmation
-    @user = 'tim.caldwell@einti.com'
-    @url  = 'http://example.com/login'
-    mail(to: @user, subject: 'Welcome to My Awesome Site')
+  def customer_order_confirmation(customer)
+    @customer = customer
+    mail(to: @customer[:email], subject: 'Your booking has been confirmed')
+  end
+
+  def supplier_order_confirmation(supplier)
+    @supplier = supplier
+    mail(to: @supplier[:email], subject: 'You have a new booking')
   end
 end

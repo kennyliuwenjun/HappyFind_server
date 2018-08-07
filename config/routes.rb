@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get '/skill_categories' => 'skill_categories#index'
 
-
+  get '/orders' => 'orders#send_test_order'
   get '/suppliers' => 'suppliers#index'
   get '/suppliers/:id/services' => 'services#supplier_services'
   post '/search_suppliers' => 'suppliers#search'
