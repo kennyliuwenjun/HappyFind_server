@@ -1,7 +1,8 @@
 class SuppliersController < ApplicationController
   # before_action :check_for_admin, :only => [:index]
-  skip_before_action :verify_authenticity_token, :only => [:search]
+  # skip_before_action :verify_authenticity_token, :only => [:search]
   # before_action :check_for_login, :only => [:show, :invite, :new, :create]
+  before_action :authenticate_supplier, :only => [:show]
 
   @_default_search_distanse = 10;
 
@@ -28,6 +29,11 @@ class SuppliersController < ApplicationController
     render :action => 'search_result.json'
   end
 
+  # GET /suppliers/show
+  def show
+    @current_supplier = current_supplier
+    render :action => 'show.json'
+  end
 
   def index
     @suppliers = Supplier.all

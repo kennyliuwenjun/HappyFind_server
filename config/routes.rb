@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post '/supplier_token' => 'supplier_token#create'
   root :to => 'suppliers#index'
 
   get '/skill_categories' => 'skill_categories#index'
@@ -8,15 +9,15 @@ Rails.application.routes.draw do
   get '/suppliers' => 'suppliers#index'
   post '/search_suppliers' => 'suppliers#search'
 
-  resources :suppliers, :only => [:new, :create, :index] # 7 CRUD methods for suppliers
+  resources :suppliers, :only => [:show, :new, :create, :index] # 7 CRUD methods for suppliers
   resources :services, :only => [:index]
   resources :orders, :only => [:index, :new, :create]
 
   post '/orders/create' => 'orders#create'
 
-  get '/login' => 'session#new'
-  post '/login' => 'session#create'
-  delete '/login' => 'session#destroy'
+  # get '/login' => 'session#new'
+  # post '/login' => 'session#create'
+  # delete '/login' => 'session#destroy'
 
   get '/session' => 'suppliers#index'
 

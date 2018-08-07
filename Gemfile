@@ -31,6 +31,7 @@ gem 'jbuilder', '~> 2.5'
  gem 'bootstrap', '~> 4.1.1'
  gem 'geocoder'
  gem 'rack-cors'
+ gem 'knock'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
