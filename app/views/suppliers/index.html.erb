@@ -1,5 +1,12 @@
 <h1>All suppliers:<%= number_to_human Supplier.count %></h1>
   <% @suppliers.each do |supplier| %>
-  <p><%= supplier.email %></p>
+    <div>
+      <p><%= supplier.id %></p>
+      <p><%= supplier.name %></p>
+      <p><%= supplier.email %></p>
+      <p><%= supplier.latitude %></p>
+      <p><%= supplier.longitude %></p>
+      <p><%= supplier.address %></p>
+    </div>
   <% end %>
 </ol>
