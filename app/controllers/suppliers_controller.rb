@@ -1,6 +1,6 @@
 class SuppliersController < ApplicationController
   # before_action :check_for_admin, :only => [:index]
-  # skip_before_action :verify_authenticity_token, :only => [:search]
+  skip_before_action :verify_authenticity_token, :only => [:search]
   # before_action :check_for_login, :only => [:show, :invite, :new, :create]
   before_action :authenticate_supplier, :only => [:show]
 
