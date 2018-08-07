@@ -1,8 +1,13 @@
 class OrdersController < ApplicationController
 
+  # TEST STUFF. Remove from Production when actual orders are set up.
+  # USAGE: BookingMailer.*_order_confirmation requires an object to be sent in with an email property, as per example below. Other properties are optional and will be passed into the templates.
   def send_test_order
     # get order
-    order = Order.first
+    # order = Order.first
+    # get customer, eg
+    # customer = order.user
+    # supplier = order.service.supplier
 
     # Test Hard Coded Values
     supplier = {
