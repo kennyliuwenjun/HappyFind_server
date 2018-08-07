@@ -1,6 +1,41 @@
 class OrdersController < ApplicationController
+  skip_before_action :verify_authenticity_token, :only => [:create]
 
-  # TEST STUFF. Remove from Production when actual orders are set up.
+  def new
+    @services = Service.all
+    @order = Order.new
+  end
+
+  # /orders/create
+  # /orders/create.json
+  def create
+    @order = Order.new order_params
+    respond_to do |format|
+      if @order.save
+        format.html { redirect_to orders_path }
+        format.json { render :show, status: :ok }
+      else
+        format.html { render :new }
+        format.json { ender json: {login: 'failed'}, status: :failed }
+      end
+    end
+  end
+
+  def index
+    @orders = Order.all
+  end
+
+  def show
+  end
+
+  
+
+  private
+  def order_params
+    params.require(:order).permit(:service_id, :date, :hours, :user_name, :user_email, :user_phone, :user_address, :payment_status)
+  end
+
+  # TEST STUFF. Remove/modify from Production when actual orders are set up.
   # USAGE: BookingMailer.*_order_confirmation requires an object to be sent in with an email property, as per example below. Other properties are optional and will be passed into the templates.
   def send_test_order
     # get order
@@ -26,5 +61,4 @@ class OrdersController < ApplicationController
     supp_response = supp_mailer.deliver_now
     supp_message_id = supp_response.mess
   end
-
 end

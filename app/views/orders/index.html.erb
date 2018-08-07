@@ -1,0 +1,32 @@
+<h1>All orders:<%= number_to_human @orders.count %></h1>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>service ID</th>
+      <th>Date</th>
+      <th>hours</th>
+      <th>user_name</th>
+      <th>user_email</th>
+      <th>user_phone</th>
+      <th>user_address</th>
+      <th>payment_status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.id %></td>
+        <td><%= order.service_id %></td>
+        <td><%= order.date %></td>
+        <td><%= order.hours %></td>
+        <td><%= order.user_name %></td>
+        <td><%= order.user_email %></td>
+        <td><%= order.user_phone %></td>
+        <td><%= order.user_address %></td>
+        <td><%= order.payment_status %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
