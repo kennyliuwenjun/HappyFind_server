@@ -37,10 +37,17 @@ Rails.application.configure do
 
   # Mailgun Config
   config.action_mailer.delivery_method = :mailgun
+
+  # config.action_mailer.mailgun_settings = {
+  #   api_key: ENV.fetch("MAILGUN_KEY"),
+  #   domain: ENV.fetch("MAILGUN_DOMAIN")
+  # }
+
   config.action_mailer.mailgun_settings = {
-    api_key: ENV.fetch("MAILGUN_KEY"),
-    domain: ENV.fetch("MAILGUN_DOMAIN")
+    api_key: ENV['MAILGUN_KEY'],
+    domain: ENV['MAILGUN_DOMAIN']
   }
+
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
