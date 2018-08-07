@@ -14,9 +14,6 @@ class SessionController < ApplicationController
   def create
     # supplier = Supplier.find_by :name =>
     # params[:name]
-    p "======================================================="
-    p params[:email]
-    p params[:password]
     supplier = Supplier.find_by :email =>
     params[:email]
     if supplier.present? &&   supplier.authenticate(params[:password])
