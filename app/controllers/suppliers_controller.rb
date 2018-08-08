@@ -1,7 +1,8 @@
 class SuppliersController < ApplicationController
   # before_action :check_for_admin, :only => [:index]
-  skip_before_action :verify_authenticity_token, :only => [:search, :show]
+  skip_before_action :verify_authenticity_token, :only => [:search, :create, :show]
   # before_action :check_for_login, :only => [:show, :invite, :new, :create]
+  before_action :authenticate_supplier, :only => [:show]
 
   @_default_search_distanse = 10;
 
@@ -28,6 +29,11 @@ class SuppliersController < ApplicationController
     render :action => 'search_result.json'
   end
 
+  # GET /suppliers/show
+  def show
+    @supplier = current_supplier
+    render :action => 'show.json'
+  end
 
   def index
     @suppliers = Supplier.all
@@ -37,16 +43,17 @@ class SuppliersController < ApplicationController
     @supplier = Supplier.new
   end
 
-  def show
+  def getSupplier
     @supplier = Supplier.find_by :id => params[:id]
     render :action => 'show.json'
   end
 
   def create
-    @supplier = Supplier.new(supplier_params)
 
+    @supplier = Supplier.new(supplier_params)
     respond_to do |format|
       if @supplier.save
+        p params
         # SupplierMailer.welcome(@supplier).deliver_now
         format.html { redirect_to root_path, notice: 'Contractor was created.'}
         format.json { render :show, status: :created, location: @supplier }
@@ -59,10 +66,6 @@ class SuppliersController < ApplicationController
 
   private
   def supplier_params
-    params.require(:supplier).permit(:name, :address, :latitude, :longitude, :email, :password, :password_confirmation)
-  end
-
-  def search_params
-    params.require(:flight).permit(:plane_id, :flight_number, :from, :to, :depart_dt)
+    params.require(:supplier).permit(:name, :address, :email, :password, :password_confirmation)
   end
 end

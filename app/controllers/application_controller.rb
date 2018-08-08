@@ -1,13 +1,9 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
-  before_action :fetch_supplier
+  include Knock::Authenticable
 
   private
-    def fetch_supplier
-      @current_supplier = Supplier.find_by :id => session[:supplier_id] if session[:supplier_id].present?
-      session[:supplier_id] = nil unless @current_supplier.present?
-    end
-    def check_for_login
-      redirect_to login_path unless @current_supplier.present?
-    end
+  # Define unauthorized access json response
+  def unauthorized_entity(entity_name)
+    render json: { error: "Unauthorized request" }, status: :unauthorized
+  end
 end

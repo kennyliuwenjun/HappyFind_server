@@ -48,7 +48,6 @@ Rails.application.configure do
     domain: ENV['MAILGUN_DOMAIN']
   }
 
-
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

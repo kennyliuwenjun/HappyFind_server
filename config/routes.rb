@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post '/supplier_token' => 'supplier_token#create'
   root :to => 'suppliers#index'
 
   get '/skill_categories' => 'skill_categories#index'
@@ -8,9 +9,11 @@ Rails.application.routes.draw do
   get '/suppliers' => 'suppliers#index'
   post '/search_suppliers' => 'suppliers#search'
 
-  resources :suppliers, :only => [:new, :create, :index, :show] # 7 CRUD methods for suppliers
+  resources :suppliers
   resources :services, :only => [:index]
   resources :orders, :only => [:index, :new, :create]
+
+  get '/supplier/:id' => 'suppliers#getSupplier'
 
   post '/orders/create' => 'orders#create'
 

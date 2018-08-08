@@ -6,8 +6,8 @@ class OrdersController < ApplicationController
     @order = Order.new
   end
 
-  # /orders/create
-  # /orders/create.json
+  # POST /orders/create
+  # POST /orders/create.json
   def create
     @order = Order.new order_params
     respond_to do |format|
@@ -18,11 +18,13 @@ class OrdersController < ApplicationController
         send_order_confirmation( order: @order )
       else
         format.html { render :new }
-        format.json { ender json: {login: 'failed'}, status: :failed }
+        format.json { render json: {login: 'failed'}, status: :failed }
       end
     end
   end
 
+  # GET /orders
+  # GET /orders.json
   def index
     @orders = Order.all
   end
@@ -30,7 +32,7 @@ class OrdersController < ApplicationController
   def show
   end
 
-  
+
 
   private
   def order_params
@@ -41,11 +43,11 @@ class OrdersController < ApplicationController
   # USAGE: BookingMailer.*_order_confirmation requires an object to be sent in with an email property, as per example below. Other properties are optional and will be passed into the templates.
   def send_order_confirmation(order:)
     # get order
-   
+
     # get customer, eg
     customer = order.slice(:user_name, :user_email, :user_phone, :user_address)
     supplier = order.supplier
-    
+
     # create & send emails
     begin
       cust_mailer = BookingMailer.customer_order_confirmation customer, supplier

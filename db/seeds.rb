@@ -20,7 +20,10 @@ sc4 = SkillCategory.create :name => 'Plumber'
 sc5 = SkillCategory.create :name => 'Tutor'
 sc6 = SkillCategory.create :name => 'Electrician'
 sc7 = SkillCategory.create :name => 'Programmer'
-skills = [] << sc1 << sc2 << sc3 << sc4 << sc5 << sc6 << sc7
+sc8 = SkillCategory.create :name => 'Private Massage'
+
+skills = [] << sc1 << sc2 << sc3 << sc4 << sc5 << sc6 << sc7 << sc8
+
 Service.destroy_all
 se1 = Service.create :supplier_id => s2.id, :skill_category_id => sc1.id, :price => 5 #Kenny Cook $5
 se2 = Service.create :supplier_id => s2.id, :skill_category_id => sc7.id, :price => 10 #Kenny  Programmer $10
@@ -29,6 +32,7 @@ se4 = Service.create :supplier_id => s5.id, :skill_category_id => sc7.id, :price
 se5 = Service.create :supplier_id => s1.id, :skill_category_id => sc7.id, :price => 20 #Tim Programmer $20
 se6 = Service.create :supplier_id => s3.id, :skill_category_id => sc7.id, :price => 10 #Lucas Programmer $10
 se7 = Service.create :supplier_id => s3.id, :skill_category_id => sc2.id, :price => 5 #Lucas Painter $5
+se7 = Service.create :supplier_id => s3.id, :skill_category_id => sc8.id, :price => 0.01 #Lucas Private Massage $0.01
 se8 = Service.create :supplier_id => s6.id, :skill_category_id => sc4.id, :price => 1 #Joel Plumber $1
 
 Order.destroy_all
