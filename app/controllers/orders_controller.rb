@@ -14,6 +14,8 @@ class OrdersController < ApplicationController
       if @order.save
         format.html { redirect_to orders_path }
         format.json { render :show, status: :ok }
+        # Send Confirmation Email
+        send_order_confirmation( order: @order )
       else
         format.html { render :new }
         format.json { render json: {login: 'failed'}, status: :failed }
@@ -39,28 +41,34 @@ class OrdersController < ApplicationController
 
   # TEST STUFF. Remove/modify from Production when actual orders are set up.
   # USAGE: BookingMailer.*_order_confirmation requires an object to be sent in with an email property, as per example below. Other properties are optional and will be passed into the templates.
-  def send_test_order
+  def send_order_confirmation(order:)
     # get order
-    # order = Order.first
-    # get customer, eg
-    # customer = order.user
-    # supplier = order.service.supplier
 
-    # Test Hard Coded Values
-    supplier = {
-      email: 'tim.caldwell@einti.com'
-    }
-    customer = {
-      email: 'tim.caldwell@einti.com'
-    }
+    # get customer, eg
+    customer = order.slice(:user_name, :user_email, :user_phone, :user_address)
+    supplier = order.supplier
 
     # create & send emails
-    cust_mailer = BookingMailer.customer_order_confirmation customer
-    cust_response = cust_mailer.deliver_now
-    cust_message_id = cust_response.mess
+    begin
+      cust_mailer = BookingMailer.customer_order_confirmation customer, supplier
+      cust_mailer.raise_delivery_errors = true
+      cust_mailer.deliver_now
+      cust_message_id = cust_mailer.message_id
+      order[:mail_cust] = true
+    rescue
+      order[:mail_cust] = false
+    end
 
-    supp_mailer = BookingMailer.supplier_order_confirmation supplier
-    supp_response = supp_mailer.deliver_now
-    supp_message_id = supp_response.mess
+    begin
+      supp_mailer = BookingMailer.supplier_order_confirmation supplier, customer
+      supp_mailer.raise_delivery_errors = true
+      supp_mailer.deliver_now
+      supp_message_id = supp_mailer.message_id
+      order[:mail_cust] = true
+    rescue
+      order[:mail_cust] = false
+    end
+
+    order.save
   end
 end

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :services, :only => [:index]
   resources :orders, :only => [:index, :new, :create]
 
+  get '/supplier/:id' => 'suppliers#getSupplier'
 
   post '/orders/create' => 'orders#create'
 

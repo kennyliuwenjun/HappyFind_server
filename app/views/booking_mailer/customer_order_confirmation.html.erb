@@ -8,14 +8,10 @@
 </head>
 <body>
   <!-- CUSTOMISE ME - I'M THE CUSTOMER ORDER CONFIRMATION EMAIL TEMPLATE-->
-  <h1>Welcome to example.com, <%= "cust test" %></h1>
+  <h1>Your order is confirmed!</h1>
   <p>
-    You have successfully signed up to example.com,
-    your username is: <%= "cust test" %>.<br>
+    Congratulations <%= @customer[:user_name] %> your booking for <%= @supplier[:name] %> has been received and confirmed.
   </p>
-  <p>
-    To login to the site, just follow this link: <%= "cust test" %>.
-  </p>
-  <p>Thanks for joining and have a great day!</p>
+  <p>Thanks for your booking!</p>
 </body>
 </html>

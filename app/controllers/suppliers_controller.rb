@@ -1,6 +1,6 @@
 class SuppliersController < ApplicationController
   # before_action :check_for_admin, :only => [:index]
-  skip_before_action :verify_authenticity_token, :only => [:search, :create]
+  skip_before_action :verify_authenticity_token, :only => [:search, :create, :show]
   # before_action :check_for_login, :only => [:show, :invite, :new, :create]
   before_action :authenticate_supplier, :only => [:show]
 
@@ -41,6 +41,11 @@ class SuppliersController < ApplicationController
 
   def new
     @supplier = Supplier.new
+  end
+
+  def getSupplier
+    @supplier = Supplier.find_by :id => params[:id]
+    render :action => 'show.json'
   end
 
   def create
