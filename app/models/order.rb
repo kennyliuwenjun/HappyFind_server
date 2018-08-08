@@ -13,8 +13,11 @@
 #  user_phone     :text
 #  user_address   :text
 #  payment_status :integer
+#  mail_cust      :boolean
+#  mail_supp      :boolean
 #
 
 class Order < ApplicationRecord
   belongs_to :service, :optional => true
+  has_one :supplier, :through => :service
 end

@@ -8,14 +8,18 @@
 </head>
 <body>
   <!-- CUSTOMISE ME - I'M THE SUPPLIER ORDER CONFIRMATION EMAIL TEMPLATE-->
-  <h1>Welcome to example.com, <%= "supplier test" %></h1>
+  <h1>Congratulations <%= @supplier.name %>, you have a new booking!</h1>
   <p>
-    You have successfully signed up to example.com,
-    your username is: <%= "supplier test" %>.<br>
+    <%= @customer[:user_name] %> has booked with you. Please contact the customer directly to arrange details.
   </p>
   <p>
-    To login to the site, just follow this link: <%= "supplier test" %>.
+    Customer Details:
+    <ul>
+      <li><%= @customer[:user_name] %></li>
+      <li><%= @customer[:user_phone] %></li>
+      <li><%= @customer[:user_address] %></li>
+    </ul>
   </p>
-  <p>Thanks for joining and have a great day!</p>
+  <p>Thanks for using Happy Find!</p>
 </body>
 </html>
