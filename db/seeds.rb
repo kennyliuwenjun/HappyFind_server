@@ -1,3 +1,7 @@
+require_relative './seeddata/firstnames.rb'
+require_relative './seeddata/surnames.rb'
+require_relative './seeddata/suburbs.rb'
+
 Supplier.destroy_all
 s1 = Supplier.create :email => 'tim@ga', :password => 'chicken', :name => 'Tim', :latitude => -33.8845689, :longitude => 151.205796708695
 s2 = Supplier.create :email => 'kenny@ga', :password => 'chicken', :name => 'Kenny', :latitude => -33.7744947, :longitude => 151.0475215
@@ -8,6 +12,7 @@ s6 = Supplier.create :email => 'joel@ga', :password => 'chicken', :name => 'Joel
 s7 = Supplier.create :email => 'robot1@ga', :password => 'chicken', :name => 'Robot1', :latitude => -33.7311912, :longitude => 151.0062336
 
 SkillCategory.destroy_all
+
 sc1 = SkillCategory.create :name => 'Cook'
 sc2 = SkillCategory.create :name => 'Paint'
 sc3 = SkillCategory.create :name => 'Driver'
@@ -15,7 +20,7 @@ sc4 = SkillCategory.create :name => 'Plumber'
 sc5 = SkillCategory.create :name => 'Tutor'
 sc6 = SkillCategory.create :name => 'Electrician'
 sc7 = SkillCategory.create :name => 'Programmer'
-
+skills = [] << sc1 << sc2 << sc3 << sc4 << sc5 << sc6 << sc7
 Service.destroy_all
 se1 = Service.create :supplier_id => s2.id, :skill_category_id => sc1.id, :price => 5 #Kenny Cook $5
 se2 = Service.create :supplier_id => s2.id, :skill_category_id => sc7.id, :price => 10 #Kenny  Programmer $10
@@ -36,3 +41,12 @@ se1.orders << o1 #Order for Kenny Cook $5 for 48 hours
 se2.orders << o2 #Order for Kenny Programmer $10 for 2 hours
 se3.orders << o3 #Order for Kenny Driver $7 for 5 hours
 se4.orders << o4 #Order for John Programer $20 for 0.5 hours
+
+## Randomly Generate X seeds from Sample data.
+0.upto 100 do
+  name = [] << NAMES.sample << SURNAMES.sample
+
+  s = Supplier.create :email => "#{name.join "."}@ga.co", :password => 'chicken', :name => name.join(" "), :address => SUBURBS.sample
+
+  s.services.create :skill_category_id => skills.sample.id, :price => rand((100..5000))/100*10
+end
