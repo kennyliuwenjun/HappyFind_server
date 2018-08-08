@@ -1,1 +1,1 @@
-json.partial! "suppliers/supplier", supplier: @current_supplier
+json.partial! "suppliers/supplier", supplier: @supplier

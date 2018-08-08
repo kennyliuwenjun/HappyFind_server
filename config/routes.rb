@@ -9,15 +9,16 @@ Rails.application.routes.draw do
   get '/suppliers' => 'suppliers#index'
   post '/search_suppliers' => 'suppliers#search'
 
-  resources :suppliers, :only => [:show, :new, :create, :index] # 7 CRUD methods for suppliers
+  resources :suppliers
   resources :services, :only => [:index]
   resources :orders, :only => [:index, :new, :create]
 
+
   post '/orders/create' => 'orders#create'
 
-  # get '/login' => 'session#new'
-  # post '/login' => 'session#create'
-  # delete '/login' => 'session#destroy'
+  get '/login' => 'session#new'
+  post '/login' => 'session#create'
+  delete '/login' => 'session#destroy'
 
   get '/session' => 'suppliers#index'
 

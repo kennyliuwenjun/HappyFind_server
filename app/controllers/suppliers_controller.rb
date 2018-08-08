@@ -1,6 +1,6 @@
 class SuppliersController < ApplicationController
   # before_action :check_for_admin, :only => [:index]
-  skip_before_action :verify_authenticity_token, :only => [:search]
+  skip_before_action :verify_authenticity_token, :only => [:search, :create]
   # before_action :check_for_login, :only => [:show, :invite, :new, :create]
   before_action :authenticate_supplier, :only => [:show]
 
@@ -31,7 +31,7 @@ class SuppliersController < ApplicationController
 
   # GET /suppliers/show
   def show
-    @current_supplier = current_supplier
+    @supplier = current_supplier
     render :action => 'show.json'
   end
 
@@ -44,10 +44,11 @@ class SuppliersController < ApplicationController
   end
 
   def create
-    @supplier = Supplier.new(supplier_params)
 
+    @supplier = Supplier.new(supplier_params)
     respond_to do |format|
       if @supplier.save
+        p params
         # SupplierMailer.welcome(@supplier).deliver_now
         format.html { redirect_to root_path, notice: 'Contractor was created.'}
         format.json { render :show, status: :created, location: @supplier }
@@ -60,10 +61,6 @@ class SuppliersController < ApplicationController
 
   private
   def supplier_params
-    params.require(:supplier).permit(:name, :address, :latitude, :longitude, :email, :password, :password_confirmation)
-  end
-
-  def search_params
-    params.require(:flight).permit(:plane_id, :flight_number, :from, :to, :depart_dt)
+    params.require(:supplier).permit(:name, :address, :email, :password, :password_confirmation)
   end
 end
