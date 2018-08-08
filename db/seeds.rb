@@ -21,6 +21,7 @@ sc5 = SkillCategory.create :name => 'Tutor'
 sc6 = SkillCategory.create :name => 'Electrician'
 sc7 = SkillCategory.create :name => 'Programmer'
 sc8 = SkillCategory.create :name => 'Private Massage'
+sc7 = SkillCategory.create :name => 'English Spainish Translator'
 
 skills = [] << sc1 << sc2 << sc3 << sc4 << sc5 << sc6 << sc7 << sc8
 
