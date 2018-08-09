@@ -11,6 +11,8 @@
 #  latitude        :float
 #  longitude       :float
 #  address         :string
+#  isSupplier      :boolean
+#  phone           :text
 #
 
 require 'test_helper'

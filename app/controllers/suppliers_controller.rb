@@ -17,14 +17,14 @@ class SuppliersController < ApplicationController
       if skill_category.present?
         scope1 = Service.where(skill_category_id: skill_category).pluck(:supplier_id)
         scope2 = Supplier.near([lat, lng], radius, {order: "", units: :km}).pluck(:id)
-        @suppliers = Supplier.find( scope1 & scope2 )
+        @suppliers = Supplier.where(isSupplier: true).find(scope1 & scope2)
       else
-        @suppliers = Supplier.near([lat, lng], radius, units: :km)
+        @suppliers = Supplier.near([lat, lng], radius, units: :km).where(isSupplier: true)
       end
     elsif params[:skill_category].present?
-      @suppliers = Supplier.find(Service.where(skill_category_id: params[:skill_category]).pluck(:supplier_id));
+      @suppliers = Supplier.find(Service.where(skill_category_id: params[:skill_category], isSupplier: true).pluck(:supplier_id));
     else
-      @suppliers = Supplier.all
+      @suppliers = Supplier.where(isSupplier: true)
     end
     render :action => 'search_result.json'
   end

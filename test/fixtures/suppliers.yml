@@ -11,6 +11,8 @@
 #  latitude        :float
 #  longitude       :float
 #  address         :string
+#  isSupplier      :boolean
+#  phone           :text
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

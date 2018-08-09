@@ -13,6 +13,8 @@
 #  user_phone     :text
 #  user_address   :text
 #  payment_status :integer
+#  mail_cust      :boolean
+#  mail_supp      :boolean
 #
 
 require 'test_helper'

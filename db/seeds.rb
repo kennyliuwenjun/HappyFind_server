@@ -3,13 +3,13 @@ require_relative './seeddata/surnames.rb'
 require_relative './seeddata/suburbs.rb'
 
 Supplier.destroy_all
-s1 = Supplier.create :email => 'tim@ga', :password => 'chicken', :name => 'Tim', :latitude => -33.8845689, :longitude => 151.205796708695
-s2 = Supplier.create :email => 'kenny@ga', :password => 'chicken', :name => 'Kenny', :latitude => -33.7744947, :longitude => 151.0475215
-s3 = Supplier.create :email => 'lucas@ga', :password => 'chicken', :name => 'Lucas', :latitude => -33.7311912, :longitude => 151.20169
-s4 = Supplier.create :email => 'robert@ga', :password => 'chicken', :name => 'Robert', :latitude => -33.866008, :longitude => 151.205552
-s5 = Supplier.create :email => 'john@ga', :password => 'chicken', :name => 'John', :latitude => -33.8714234, :longitude => 151.2044743
-s6 = Supplier.create :email => 'joel@ga', :password => 'chicken', :name => 'Joel', :latitude => -33.8714234, :longitude => 151.2044743
-s7 = Supplier.create :email => 'robot1@ga', :password => 'chicken', :name => 'Robot1', :latitude => -33.7311912, :longitude => 151.0062336
+s1 = Supplier.create :email => 'tim@ga', :password => 'chicken', :name => 'Tim', :latitude => -33.8845689, :longitude => 151.205796708695, :isSupplier => true
+s2 = Supplier.create :email => 'kenny@ga', :password => 'chicken', :name => 'Kenny', :latitude => -33.7744947, :longitude => 151.0475215, :isSupplier => true
+s3 = Supplier.create :email => 'lucas@ga', :password => 'chicken', :name => 'Lucas', :latitude => -33.7311912, :longitude => 151.20169, :isSupplier => true
+s4 = Supplier.create :email => 'robert@ga', :password => 'chicken', :name => 'Robert', :latitude => -33.866008, :longitude => 151.205552, :isSupplier => true
+s5 = Supplier.create :email => 'john@ga', :password => 'chicken', :name => 'John', :latitude => -33.8714234, :longitude => 151.2044743, :isSupplier => true
+s6 = Supplier.create :email => 'joel@ga', :password => 'chicken', :name => 'Joel', :latitude => -33.8714234, :longitude => 151.2044743, :isSupplier => true
+s7 = Supplier.create :email => 'robot1@ga', :password => 'chicken', :name => 'Robot1', :latitude => -33.7311912, :longitude => 151.0062336, :isSupplier => true
 
 SkillCategory.destroy_all
 
@@ -48,10 +48,10 @@ se3.orders << o3 #Order for Kenny Driver $7 for 5 hours
 se4.orders << o4 #Order for John Programer $20 for 0.5 hours
 
 ## Randomly Generate X seeds from Sample data.
-0.upto 1000 do
-  name = [] << NAMES.sample << SURNAMES.sample
-
-  s = Supplier.create :email => "#{name.join "."}@ga.co", :password => 'chicken', :name => name.join(" "), :address => SUBURBS.sample
-
-  s.services.create :skill_category_id => skills.sample.id, :price => rand((100..5000))/100*10
-end
+# 0.upto 10 do
+#   name = [] << NAMES.sample << SURNAMES.sample
+#
+#   s = Supplier.create :email => "#{name.join "."}@ga.co", :password => 'chicken', :name => name.join(" "), :address => SUBURBS.sample, :isSupplier => true
+#
+#   s.services.create :skill_category_id => skills.sample.id, :price => rand((100..5000))/100*10
+# end
