@@ -1,8 +1,8 @@
 class SuppliersController < ApplicationController
   # before_action :check_for_admin, :only => [:index]
-  skip_before_action :verify_authenticity_token, :only => [:search, :create, :show]
+  skip_before_action :verify_authenticity_token, :only => [:search, :create, :show, :update]
   # before_action :check_for_login, :only => [:show, :invite, :new, :create]
-  before_action :authenticate_supplier, :only => [:show]
+  before_action :authenticate_supplier, :only => [:show, :update]
 
   @_default_search_distanse = 10;
 
@@ -39,6 +39,25 @@ class SuppliersController < ApplicationController
     @suppliers = Supplier.all
   end
 
+  def update
+    @supplier = Supplier.find(current_supplier.id)
+    @supplier.update supplier_params
+    if params[:services].count
+      @supplier.isSupplier = true
+
+      current_supplier.services.destroy_all
+
+      params[:services].each do |request_service|
+        Service.create :supplier_id => current_supplier.id, :skill_category_id => request_service[:skill_category_id], :price => request_service[:price]
+      end
+
+    else
+      @supplier.isSupplier = false
+    end
+
+    render :action => 'show.json'
+  end
+
   def new
     @supplier = Supplier.new
   end
@@ -53,7 +72,6 @@ class SuppliersController < ApplicationController
     @supplier = Supplier.new(supplier_params)
     respond_to do |format|
       if @supplier.save
-        p params
         # SupplierMailer.welcome(@supplier).deliver_now
         format.html { redirect_to root_path, notice: 'Contractor was created.'}
         format.json { render :show, status: :created, location: @supplier }
@@ -66,6 +84,6 @@ class SuppliersController < ApplicationController
 
   private
   def supplier_params
-    params.require(:supplier).permit(:name, :address, :email, :password, :password_confirmation)
+    params.require(:supplier).permit(:phone, :name, :address, :email, :password, :password_confirmation)
   end
 end

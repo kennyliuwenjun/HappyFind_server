@@ -5,7 +5,7 @@ class CreateServices < ActiveRecord::Migration[5.2]
       t.integer :skill_category_id
       t.decimal :price, :precision => 8, :scale => 2
 
-      t.index [:supplier_id, :skill_category_id]
+      t.index [:supplier_id, :skill_category_id], :unique => true
       t.timestamps
     end
   end

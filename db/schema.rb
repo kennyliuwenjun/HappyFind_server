@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2018_08_08_234001) do
     t.decimal "price", precision: 8, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["supplier_id", "skill_category_id"], name: "index_services_on_supplier_id_and_skill_category_id"
+    t.index ["supplier_id", "skill_category_id"], name: "index_services_on_supplier_id_and_skill_category_id", unique: true
   end
 
   create_table "skill_categories", force: :cascade do |t|

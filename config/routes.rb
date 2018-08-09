@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :orders, :only => [:index, :new, :create]
 
   get '/supplier/:id' => 'suppliers#getSupplier'
+  post '/supplier/update' => 'suppliers#update'
 
   post '/orders/create' => 'orders#create'
 
