@@ -48,10 +48,10 @@ se3.orders << o3 #Order for Kenny Driver $7 for 5 hours
 se4.orders << o4 #Order for John Programer $20 for 0.5 hours
 
 ## Randomly Generate X seeds from Sample data.
-# 0.upto 10 do
-#   name = [] << NAMES.sample << SURNAMES.sample
-#
-#   s = Supplier.create :email => "#{name.join "."}@ga.co", :password => 'chicken', :name => name.join(" "), :address => SUBURBS.sample, :isSupplier => true
-#
-#   s.services.create :skill_category_id => skills.sample.id, :price => rand((100..5000))/100*10
-# end
+0.upto 1000 do
+  name = [] << NAMES.sample << SURNAMES.sample
+
+  s = Supplier.create :email => "#{name.join "."}@ga.co", :password => 'chicken', :name => name.join(" "), :address => SUBURBS.sample, :isSupplier => true
+
+  s.services.create :skill_category_id => skills.sample.id, :price => rand((100..5000))/100*10
+end
