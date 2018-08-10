@@ -13,6 +13,11 @@ Code Versions:
 * Rails 5.2.0
 * Postgres 10.4
 
+Additional Gems:
+* knock
+* mailgun-ruby
+* geocoder
+* rack-cors
 
 ## Setup and Installation
 
