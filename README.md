@@ -27,4 +27,6 @@ Happy Find server uses a postgres database, so ensure you have postgres 10.4 or 
 * Deployment instructions
 For command-line deployment to heroku, simply:
 1. `heroku create`
+2. `heroku config:set MAILGUN_KEY={YOUR KEY HERE}`
+2. `heroku config:set MAILGUN_DOMAIN={YOUR MAILGUN DOMAIN HERE}`
 2. `git push heroku master`
